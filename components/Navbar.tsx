@@ -16,7 +16,6 @@ export default function Navbar({ locale }:{ locale: "fr" | "en" }){
           <Link href={`/${locale}#products`} className="hover:text-white">{alt.products}</Link>
           <Link href={`/${locale}#why`} className="hover:text-white">{alt.why}</Link>
           <Link href={`/${locale}#contact`} className="hover:text-white">{alt.contact}</Link>
-          <Button href={`/${locale}#contact`}>{alt.contact}</Button>
           <Link href={`/${other}`} className="ml-2 text-slate-400 hover:text-white uppercase">{other}</Link>
         </nav>
         <div className="md:hidden flex items-center gap-3">
