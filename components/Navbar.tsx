@@ -10,7 +10,7 @@ export default function Navbar({ locale }:{ locale: "fr" | "en" }){
     <header className="sticky top-0 z-30 border-b border-white/10 bg-[#0b0f1a]/70 backdrop-blur">
       <div className="container-max flex items-center justify-between py-3">
         <Link href={`/${locale}`} className="flex items-center gap-2">
-          <Image src="/asplenz-logo.svg" alt="Asplenz" width={160} height={40} priority />
+          <Image src="/asplenz-logo_emerald.png" alt="Asplenz" width={100} height={80} priority />
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm text-slate-200">
           <Link href={`/${locale}#products`} className="hover:text-white">{alt.products}</Link>
