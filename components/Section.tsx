@@ -1,65 +1,37 @@
-// components/Section.tsx
-import * as React from "react";
+import { ReactNode } from "react";
 
-type SectionProps = {
+export type SectionProps = {
   id?: string;
+  title: string;
+  /** Small label above the title (aka kicker/eyebrow) */
   eyebrow?: string;
-  title?: string;
-  /** aligne avec ton usage dans la page */
-  lead?: string;
-  /** aligne avec ton usage dans la page */
+  /** Primary lead paragraph; if omitted, we'll fall back to `subtitle` */
+  lead?: ReactNode;
+  /** Backwards-compat: alternate prop name used by some pages */
+  subtitle?: string;
   muted?: boolean;
-  children?: React.ReactNode;
-  /** compacte l'espacement vertical */
-  dense?: boolean;
-  /** override classes sur <section> */
   className?: string;
-  /** override l’espace avant children */
-  contentClassName?: string;
+  children?: ReactNode;
 };
-
-function cn(...classes: (string | undefined | null | false)[]) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function Section({
   id,
-  eyebrow,
   title,
+  eyebrow,
   lead,
-  muted = false,
+  subtitle,
+  muted,
+  className = "",
   children,
-  dense = false,
-  className,
-  contentClassName,
 }: SectionProps) {
-  const blockY = dense ? "py-6 md:py-8" : "py-8 md:py-8"; // plus serré que py-16/md:py-24
-  const gapTop = dense ? "mt-4" : "mt-6";
-
+  const leadText = lead ?? subtitle; // allow using either prop name
   return (
-    <section
-      id={id}
-      className={cn(
-        blockY,
-        muted ? "bg-slate-900/40" : "",
-        // évite l’effet “double padding” entre deux sections consécutives
-        "[&+:section]:pt-0",
-        className
-      )}
-    >
+    <section id={id} className={`section ${muted ? "section-muted" : ""} ${className}`}>
       <div className="container-max">
-        {eyebrow && (
-          <div className="text-xs uppercase tracking-widest text-emerald-300/80">
-            {eyebrow}
-          </div>
-        )}
-        {title && (
-          <h2 className="mt-2 text-2xl md:text-4xl font-semibold">{title}</h2>
-        )}
-        {lead && <p className="mt-3 text-slate-300 max-w-2xl">{lead}</p>}
-        <div className={cn(gapTop, contentClassName, "[&>*:last-child]:mb-0")}>
-          {children}
-        </div>
+        {eyebrow && <div className="kicker mb-4">{eyebrow}</div>}
+        <h2 className="h2 mb-3">{title}</h2>
+        {leadText && <p className="lead mb-8 max-w-3xl">{leadText}</p>}
+        {children}
       </div>
     </section>
   );
