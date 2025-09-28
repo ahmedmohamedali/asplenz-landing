@@ -3,25 +3,22 @@ import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button";
 
-export default function Navbar({ locale }:{ locale: "fr" | "en" }){
-  const alt = locale === "fr" ? {products:"Produits",why:"Pourquoi maintenant",contact:"Contact"} : {products:"Products",why:"Why Now",contact:"Contact"};
-  const other = locale === "fr" ? "en" : "fr";
+export default function Navbar({ locale = "en" }: { locale: "en" | "fr" }) {
+  const isFr = locale === "fr";
   return (
-    <header className="sticky top-0 z-30 border-b border-white/10 bg-[#0b0f1a]/70 backdrop-blur">
-      <div className="container-max flex items-center justify-between py-3">
-        <Link href={`/${locale}`} className="flex items-center gap-2">
-          <Image src="/asplenz-logo_emerald.png" alt="Asplenz" width={100} height={80} priority />
-        </Link>
-        <nav className="hidden md:flex items-center gap-6 text-sm text-slate-200">
-          <Link href={`/${locale}#products`} className="hover:text-white">{alt.products}</Link>
-          <Link href={`/${locale}#why`} className="hover:text-white">{alt.why}</Link>
-          <Link href={`/${locale}#contact`} className="hover:text-white">{alt.contact}</Link>
-          <Link href={`/${other}`} className="ml-2 text-slate-400 hover:text-white uppercase">{other}</Link>
-        </nav>
-        <div className="md:hidden flex items-center gap-3">
-          <Link href={`/${other}`} className="text-slate-400 hover:text-white uppercase">{other}</Link>
-          <Button href={`/${locale}#contact`} variant="ghost">{alt.contact}</Button>
+    <header className="border-b border-slate-800/60 sticky top-0 z-30 backdrop-blur bg-[#0B1020]/70">
+      <div className="container-max flex items-center justify-between py-4">
+        <div className="flex items-center gap-3">
+          <div className="h-8 w-8 rounded-md bg-brand-600" />
+          <span className="font-semibold">Asplenz</span>
         </div>
+        <nav className="hidden md:flex items-center gap-6 text-sm text-slate-300">
+          <a href="#problem" className="hover:text-white">{isFr ? "Problème" : "Problem"}</a>
+          <a href="#solution" className="hover:text-white">{isFr ? "Solution" : "Solution"}</a>
+          <a href="#why" className="hover:text-white">{isFr ? "Différenciation" : "Why Asplenz"}</a>
+          <a href="#contact" className="btn btn-primary">{isFr ? "Accès anticipé" : "Early Access"}</a>
+          <a href={isFr ? "/" : "/fr"} className="btn btn-ghost">{isFr ? "EN" : "FR"}</a>
+        </nav>
       </div>
     </header>
   );

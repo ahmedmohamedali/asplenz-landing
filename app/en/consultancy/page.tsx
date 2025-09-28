@@ -5,7 +5,7 @@ import Section from "@/components/Section";
 export default function ConsultingPage() {
   return (
     <>
-      <Navbar lang="en" />
+      <Navbar locale="en" />
 
       {/* Hero */}
       <section className="section bg-hero">
